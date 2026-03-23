@@ -887,6 +887,14 @@ export default function MapaKmGenerator() {
                     />
                   </div>
                 </div>
+                {trip.kms > 0 && (
+                  <p className="text-muted-foreground mt-2 text-right text-xs">
+                    {trip.kms} km &times; 0,40 € ={" "}
+                    <span className="font-medium">
+                      {(trip.kms * 0.4).toFixed(2)} €
+                    </span>
+                  </p>
+                )}
               </div>
             ))}
 
@@ -897,7 +905,12 @@ export default function MapaKmGenerator() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end gap-4">
+        <div className="flex items-center justify-end gap-4">
+          {totalKms > 0 && (
+            <p className="text-muted-foreground text-xs">
+              {totalKms} km &middot; {(totalKms * 0.4).toFixed(2)} €
+            </p>
+          )}
           <Button
             type="button"
             variant="outline"
