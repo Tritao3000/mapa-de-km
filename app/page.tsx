@@ -2,7 +2,16 @@
 
 import { useState } from "react"
 import { format } from "date-fns"
-import { Download, Eye, Plus, Trash2, CalendarIcon } from "lucide-react"
+import {
+  Download,
+  Eye,
+  Plus,
+  Trash2,
+  CalendarIcon,
+  Sun,
+  Moon,
+} from "lucide-react"
+import { useTheme } from "next-themes"
 import * as XLSX from "xlsx"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
@@ -688,9 +697,22 @@ export default function MapaKmGenerator() {
   }
 
   const totalKms = trips.reduce((sum, t) => sum + (t.kms || 0), 0)
+  const { resolvedTheme, setTheme } = useTheme()
 
   return (
     <div className="container mx-auto max-w-6xl px-4 py-8">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute top-4 right-4"
+        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      >
+        {resolvedTheme === "dark" ? (
+          <Sun className="h-5 w-5" />
+        ) : (
+          <Moon className="h-5 w-5" />
+        )}
+      </Button>
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold">Gerador de Mapa de Km</h1>
         <p className="text-muted-foreground">
